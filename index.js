@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-mongoose.connect('mongodb://127.0.0.1:27017/goals', {
+mongoose.connect('mongodb+srv://goal-tracker-admin:admin1234@cluster0.4r6maew.mongodb.net/Goals', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
