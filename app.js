@@ -47,11 +47,7 @@ cron.schedule('* * * * *', async () => {
     const response = await axios.get('https://goal-tracker-backend-qvge.onrender.com/api/goals');
     console.log('API called successfully:', response.data);
     
-    // Optionally, you can save the response to your database
-    // Example: Save the current timestamp to the database as a goal
-    const currentDate = new Date().toISOString();
-    const goal = new Goal({ date: currentDate });
-    await goal.save();
+    
   } catch (error) {
     console.error('Error calling API:', error);
   }
