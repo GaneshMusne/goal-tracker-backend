@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const cron = require('node-cron'); // Import node-cron
+const axios = require('axios'); // Import axios
 
 const app = express();
 
@@ -36,6 +38,22 @@ app.get('/api/goals', async (req, res) => {
     res.status(200).send(goals);
   } catch (error) {
     res.status(400).send(error);
+  }
+});
+
+// Schedule a cron job to run every minute
+cron.schedule('* * * * *', async () => {
+  try {
+    const response = await axios.get('https://goal-tracker-backend-qvge.onrender.com/api/goals');
+    console.log('API called successfully:', response.data);
+    
+    // Optionally, you can save the response to your database
+    // Example: Save the current timestamp to the database as a goal
+    const currentDate = new Date().toISOString();
+    const goal = new Goal({ date: currentDate });
+    await goal.save();
+  } catch (error) {
+    console.error('Error calling API:', error);
   }
 });
 
