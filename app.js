@@ -44,8 +44,8 @@ app.get('/api/goals', async (req, res) => {
 // Schedule a cron job to run every minute
 cron.schedule('* * * * *', async () => {
   try {
-    const response = await axios.get('https://goal-tracker-backend-dtcd.onrender.com/api/goals');
-    console.log('API called successfully:', response.data);
+    await axios.get('https://goal-tracker-backend-dtcd.onrender.com/api/goals');
+    //console.log('API called successfully:', response.data);
     
     
   } catch (error) {
